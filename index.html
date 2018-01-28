@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+      #app {
+        margin: auto;
+        max-width: 600px;
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <div id="app">
+
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          games: []
+        },
+        created() {
+          fetch('localhost:3000/games/list', {method: 'get'})
+            .then(response => response.json())
+            .then((json) => {
+              this.games = json
+            })
+        }
+      })
+    </script>
+  </body>
+
+</html>

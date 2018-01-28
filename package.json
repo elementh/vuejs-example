@@ -1,0 +1,17 @@
+{
+  "name": "vuejs-example",
+  "version": "1.0.0",
+  "description": "A Vue.JS example app",
+  "main": "backend/index.js",
+  "repository": "git@github.com:elementh/vuejs-example.git",
+  "author": "Lucas Maximiliano Marino <lucasmmarino@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon backend/index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  }
+}
