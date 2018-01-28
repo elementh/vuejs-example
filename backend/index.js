@@ -1,7 +1,7 @@
 const express = require('express')
 const http = require('http')
 const Database = require('./database')
-const port = 3000
+const port = 42481
 
 const database = new Database()
 const app = express()
