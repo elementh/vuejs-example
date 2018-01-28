@@ -13,7 +13,7 @@ Two falvors available, with and without serverside interaction.
   yarn start
 ```
 
-+ To see the serverless example, type
++ To see the serverless example, type:
 
 ```bash
   git checkout serverless-example
