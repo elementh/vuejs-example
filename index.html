@@ -12,14 +12,26 @@
         margin: auto;
         max-width: 600px;
       }
-
+      table {
+        width: 600px;
+      }
+      table tr td:last-child {
+        float: right;
+      }
     </style>
 
   </head>
 
   <body>
     <div id="app">
-
+      <h1>My Games</h1>
+      <hr>
+      <table>
+        <tr v-for="game in games">
+          <td>{{ game.title }}</td>
+          <td>{{ game.price }}</td>
+        </tr>
+      </table>
     </div>
 
     <script>
@@ -29,7 +41,7 @@
           games: []
         },
         created() {
-          fetch('localhost:3000/games/list', {method: 'get'})
+          fetch('/games/list', {method: 'get'})
             .then(response => response.json())
             .then((json) => {
               this.games = json

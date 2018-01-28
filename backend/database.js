@@ -4,12 +4,12 @@ class Database {
       {
         id: 1,
         title: 'Bayonetta 2',
-        price: 54.90
+        price: 54.95
       },
       {
         id: 2,
         title: 'Mario Kart 8 Deluxe',
-        price: 49.90
+        price: 49.95
       },
       {
         id: 3,
@@ -18,13 +18,13 @@ class Database {
       },
       {
         id: 4,
-        title: 'Xenoblad Chronicles 2',
-        price: 57.94
+        title: 'Xenoblade Chronicles 2',
+        price: 57.95
       },
       {
         id: 5,
         title: 'The Elder Scrolls V: Skyrim',
-        price: 49.90
+        price: 49.95
       }
     ]
   }
@@ -44,4 +44,5 @@ class Database {
     this.games.splice(index, 1)
   }
 }
+
 module.exports = Database
