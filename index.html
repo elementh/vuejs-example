@@ -12,12 +12,33 @@
         margin: auto;
         max-width: 600px;
       }
+
       table {
         width: 600px;
       }
+
       table tr td:last-child {
         float: right;
       }
+
+      table tr:last-of-type {
+        font-size: large;
+        font-weight: bold;
+        font-style: italic;
+      }
+
+      #title {
+        width: 200px;
+      }
+
+      #price {
+        width: 60px;
+      }
+
+      #add {
+        float: right;
+      }
+
     </style>
 
   </head>
@@ -26,10 +47,21 @@
     <div id="app">
       <h1>My Games</h1>
       <hr>
+      <label for="title">Title:</label>
+      <input v-model="title" type="text" id="title">
+      <label for="price">Price:</label>
+      <input v-model.number="price" type="number" id="price">
+      <button id="add" @click="addGame()">Add Game</button>
+      <hr>
       <table>
         <tr v-for="game in games">
-          <td>{{ game.title }}</td>
+          <td>
+            <button @click="delGame(game.id)">X</button> {{ game.title }}</td>
           <td>{{ game.price }}</td>
+        </tr>
+        <tr>
+          <td>Total Price: </td>
+          <td>{{ totalPrice }}</td>
         </tr>
       </table>
     </div>
@@ -38,14 +70,39 @@
       var app = new Vue({
         el: '#app',
         data: {
-          games: []
+          games: [],
+          title: '',
+          price: 59.95
+        },
+        computed: {
+          totalPrice() {
+            return this.games.reduce((sum, game) => {
+              return sum + game.price
+            }, 0).toFixed(2)
+          }
         },
         created() {
-          fetch('/games/list', {method: 'get'})
+          fetch('/games/list', { method: 'get' })
             .then(response => response.json())
             .then((json) => {
               this.games = json
             })
+        },
+        methods: {
+          addGame() {
+            fetch(`/games/list/${this.title}/${this.price}`, { method: 'post' })
+              .then(response => response.json())
+              .then((json) => {
+                this.games = json
+              })
+          },
+          delGame(id) {
+            fetch(`/games/list/${id}`, { method: 'delete' })
+              .then(response => response.json())
+              .then((json) => {
+                this.games = json
+              })
+          }
         }
       })
     </script>

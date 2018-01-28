@@ -22,15 +22,15 @@ app.post('/games/list/:game/:price', function (req, res) {
   let price = req.params.price
 
   database.add(title, price).then(() => {
-    res.send('added')
+    res.send(database.games)
   })
 })
 
 app.delete('/games/list/:id', function (req, res) {
-  let gameId = req.params.gameId
+  let gameId = req.params.id
 
   database.delete(gameId).then(() => {
-    res.send('deleted')
+    res.send(database.games)
   })
 })
 

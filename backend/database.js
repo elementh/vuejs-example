@@ -40,7 +40,10 @@ class Database {
   }
 
   async delete(id) {
-    let index = id - 1
+    let index = this.games.findIndex((game) => {
+      console.log("##", game.id, id)
+      return game.id == id
+    })
     this.games.splice(index, 1)
   }
 }
