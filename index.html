@@ -51,7 +51,7 @@
       <input v-model="title" type="text" id="title">
       <label for="price">Price:</label>
       <input v-model.number="price" type="number" id="price">
-      <button id="add" @click="addGame()">Add Game</button>
+      <button id="add" @click="games.push({ id: games.length, title, price })">Add Game</button>
       <hr>
       <table>
         <tr v-for="game in games">
@@ -70,7 +70,33 @@
       var app = new Vue({
         el: '#app',
         data: {
-          games: [],
+          games: [
+            {
+              id: 1,
+              title: 'Bayonetta 2',
+              price: 54.95
+            },
+            {
+              id: 2,
+              title: 'Mario Kart 8 Deluxe',
+              price: 49.95
+            },
+            {
+              id: 3,
+              title: 'Splatoon 2',
+              price: 54.95
+            },
+            {
+              id: 4,
+              title: 'Xenoblade Chronicles 2',
+              price: 57.95
+            },
+            {
+              id: 5,
+              title: 'The Elder Scrolls V: Skyrim',
+              price: 49.95
+            }
+          ],
           title: '',
           price: 59.95
         },
@@ -81,27 +107,12 @@
             }, 0).toFixed(2)
           }
         },
-        created() {
-          fetch('/games/list', { method: 'get' })
-            .then(response => response.json())
-            .then((json) => {
-              this.games = json
-            })
-        },
         methods: {
-          addGame() {
-            fetch(`/games/list/${this.title}/${this.price}`, { method: 'post' })
-              .then(response => response.json())
-              .then((json) => {
-                this.games = json
-              })
-          },
           delGame(id) {
-            fetch(`/games/list/${id}`, { method: 'delete' })
-              .then(response => response.json())
-              .then((json) => {
-                this.games = json
-              })
+            let index = this.games.findIndex((game) => {
+              return game.id == id
+            })
+            this.games.splice(index, 1)
           }
         }
       })
